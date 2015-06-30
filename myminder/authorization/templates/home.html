@@ -1,0 +1,34 @@
+<html>
+<head>
+    {% load staticfiles %}
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'authorization/css/left_menu.css' %}">
+    <script src="{% static 'authorization/js/left_menu.js' %}"></script>
+
+</head>
+<body>
+    <div class="menu-wrapper">
+        <div class="menu-pin">
+            >
+        </div>
+
+        <div class="menu">
+            {{user}}
+            <ul>
+                <li>Home</li>
+                <li>Friends</li>
+                <li>Groups</li>
+                <li>Anonymous</li>
+                <li>Minds</li>
+                <li id="create-mind">Share your mind...</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="create-mind-dialog" title="Basic dialog">
+      <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+    </div>
+</body>
+</html>
