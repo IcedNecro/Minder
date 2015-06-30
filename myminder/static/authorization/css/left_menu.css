@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+}
+
+div.menu-wrapper {
+    position: relative;
+}
+
+div.menu {
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    background-color: #444444;
+    box-shadow: 0px 0px 10px black;
+}
+
+div.menu-pin {
+    width: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 100px;
+    background-color: #444444;
+    z-index: 100;
+    position: absolute;
+    top: 40%;
+    left: 200px;
+}
+
+div.menu ul {
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    text-align: center;
+
+}
+
+div.menu ul li {
+    padding: 15px 0;
+   /* border-top: 1px solid white;
+    border-bottom: 1px solid white;*/
+    font-weight: bold;
+    color: white;
+}
+
+div.menu ul li:hover {
+    background-color: blue;
+    transition: 0.2s all;
+    -moz-transition: 0.2s all;
+    -webkit-transition: 0.2s all;
+}

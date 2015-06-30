@@ -1,0 +1,8 @@
+<form action="{% url 'auth:success_login' %}" method="post">
+    {% csrf_token %}
+    <label for="reg-login">Login:</label>
+    <input id='reg-login' type="text" name="login">
+    <label for="reg-passwd">Password:</label>
+    <input id='reg-passwd' type="password" name="passwd">
+    <input type="submit">
+</form>
