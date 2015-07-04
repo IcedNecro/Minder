@@ -15,13 +15,56 @@ $(document).ready(function(){
         }
     })
 
-    $('#create-mind').click(function() {
-        $("#create-mind-dialog").dialog('open');
+    $('.dialog-invoke').click(function() {
+        var dialog = '#' + $(this)[0].id + '-dialog';
+        $(dialog).dialog('open');
+    })
+
+    $('.expandable').click(function() {
+        var id = '.'+$(this)[0].id;
+        if($(id).css('display')=='none')
+            $(id).slideDown();
+        else {
+            $(id).slideUp();
+        }
+
     })
 
     $( "#create-mind-dialog" ).dialog({
         modal:true,
         autoOpen: false,
+        dialogClass: 'dialog-popup',
+        buttons: [{
+            text: 'ok',
+            click: function() {
+                $('#create-mind-dialog').dialog('close');
+            }
+        },]
     });
+
+    $( "#search-friend-dialog" ).dialog({
+        modal:true,
+        autoOpen: false,
+        dialogClass: 'dialog-popup',
+        width: "500px",
+        buttons: [{
+            text: 'ok',
+            click: function() {
+                $('#search-friend-dialog').dialog('close');
+            }
+        },]
+    })
+    $( "#upload-avatar-dialog" ).dialog({
+        modal:true,
+        autoOpen: false,
+        dialogClass: 'dialog-popup',
+        width: "500px",
+        buttons: [{
+            text: 'ok',
+            click: function() {
+                $('#search-friend-dialog').dialog('close');
+            }
+        },]
+    })
 
 })

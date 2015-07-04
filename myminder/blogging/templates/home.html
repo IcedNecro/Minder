@@ -1,0 +1,47 @@
+<html>
+<head>
+    {% load staticfiles %}
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'authorization/css/left_menu.css' %}">
+    <script src="{% static 'authorization/js/left_menu.js' %}"></script>
+
+</head>
+<body>
+    <div class="menu-wrapper">
+        <div class="menu-pin">
+            >
+        </div>
+
+        <div class="menu">
+            <div class="user-space">
+                <img class='avatar' src="{% static 'authorization/img/home4.svg' %}">
+                <p class="user-name">{{user}}</p>
+            </div>
+            <ul class="menu-list">
+                <li><div class="single-menu-node"><img src="{% static 'authorization/img/home4.svg' %}"><p>Home</p></div></li>
+                <li>
+                    <div class="single-menu-node expandable"><img src="{% static 'authorization/img/multiple25.svg' %}"><p>Friends</p></div>
+                    <ul class="menu-sublist hidden">
+                        <li>Pending requests</li>
+                        <li>Your requests</li>
+                        <li>Search</li>
+                    </ul>
+                </li>
+                <li><div class="single-menu-node"><img src="{% static 'authorization/img/leader.svg' %}"><p>Groups</p></div></li>
+                <li><div class="single-menu-node"><img src="{% static 'authorization/img/invisible2.svg' %}"><p>Anonymous</p></div></li>
+                <li><div class="single-menu-node"><p>Minds</p></div></li>
+                <li id="create-mind"><div class="single-menu-node"><img src="{% static 'authorization/img/dreaming.svg' %}"><p>Share your mind...</p></div></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="create-mind-dialog" title="Basic dialog">
+        <label class="row" for="create-mind-header">Mind name</label>
+        <input class="row" type="text" id="create-mind-header" >
+        <label class="row" for="create-mind-text">Mind contatin:</label>
+        <textarea class="row" id="create-mind-text" ></textarea>
+    </div>
+</body>
+</html>

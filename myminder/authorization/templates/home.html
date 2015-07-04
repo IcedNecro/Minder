@@ -1,34 +1,79 @@
-<html>
+<html ng-app="rest-app">
 <head>
     {% load staticfiles %}
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'authorization/css/left_menu.css' %}">
     <script src="{% static 'authorization/js/left_menu.js' %}"></script>
-
+    <script src="{% static 'authorization/js/rest_controller.js' %}"></script>
 </head>
-<body>
+<body ng-controller="rest-controller">
     <div class="menu-wrapper">
         <div class="menu-pin">
             >
         </div>
 
         <div class="menu">
-            {{user}}
-            <ul>
-                <li>Home</li>
-                <li>Friends</li>
-                <li>Groups</li>
-                <li>Anonymous</li>
-                <li>Minds</li>
-                <li id="create-mind">Share your mind...</li>
+            <div class="user-space">
+                <img id='upload-avatar' class='avatar dialog-invoke' src="{{ avatar_url }}">
+                <p class="user-name">{{user}}</p>
+            </div>
+            <ul class="menu-list">
+                <li><div class="single-menu-node"><img src="{% static 'authorization/img/home4.svg' %}"><p>Home</p></div></li>
+                <li>
+                    <div id="cat-friends" class="single-menu-node expandable"><img src="{% static 'authorization/img/multiple25.svg' %}"><p>Friends</p></div>
+                    <ul class="menu-sublist cat-friends">
+                        <li>Pending requests</li>
+                        <li>Your requests</li>
+                        <li id="search-friend" class="dialog-invoke">Search</li>
+                    </ul>
+                </li>
+                <li><div class="single-menu-node"><img src="{% static 'authorization/img/leader.svg' %}"><p>Groups</p></div></li>
+                <li><div class="single-menu-node"><img src="{% static 'authorization/img/invisible2.svg' %}"><p>Anonymous</p></div></li>
+                <li><div class="single-menu-node"><p>Minds</p></div></li>
+                <li id="create-mind" class="dialog-invoke"><div class="single-menu-node"><img src="{% static 'authorization/img/dreaming.svg' %}"><p>Share your mind...</p></div></li>
+                <li id="log-out">
+                    <div class="single-menu-node" ng-click="logoutRequest()">
+                        <img src="{% static 'authorization/img/leader.svg' %}">
+                        <p>Log out</p>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
 
     <div id="create-mind-dialog" title="Basic dialog">
-      <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+        <label class="row" for="create-mind-header">Mind name</label>
+        <input class="row" type="text" id="create-mind-header" >
+        <label class="row" for="create-mind-text">Mind contatin:</label>
+        <textarea class="row" id="create-mind-text" ></textarea>
+    </div>
+
+    <div id="search-friend-dialog" title="Basic dialog">
+        {% verbatim %}
+        <div class="row">
+            <label for="search-friend-line">Search:</label>
+            <input ng-model="name" type="text" id="search-friend-line" ng-keyup="getFriends(name)">
+            <button class="search-friend-submit">Search..</button>
+        </div>
+
+        <table id="search-friend-result" class="row">
+            <!-- Place for Angular controller -->
+            <tr ng-repeat="friend in friends">
+                <td><img ng-src='{{friend.image_url}}' class="avatar-shortcut"></td>
+                <td>{{ friend.username }}</td>
+                <td>Send request</td>
+            </tr>
+        </table>
+        {% endverbatim %}
+    </div>
+    <div id="upload-avatar-dialog">
+        <form action="{% url 'blog:upload_avatar' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ avatar_form }}
+            <input type="submit" value="Submit">
+        </form>
     </div>
 </body>
 </html>
