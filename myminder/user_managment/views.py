@@ -20,3 +20,8 @@ def log_out_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('auth:login', args=()))
 
+def subscribe(request):
+
+    if request.method == 'POST':
+        import ipdb; ipdb.set_trace()
+        print(request.user.id)

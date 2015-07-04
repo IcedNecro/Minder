@@ -1,4 +1,4 @@
-<html ng-app="rest-app">
+<html ng-app="rest_app">
 <head>
     {% load staticfiles %}
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -51,6 +51,7 @@
     </div>
 
     <div id="search-friend-dialog" title="Basic dialog">
+
         {% verbatim %}
         <div class="row">
             <label for="search-friend-line">Search:</label>
@@ -63,7 +64,8 @@
             <tr ng-repeat="friend in friends">
                 <td><img ng-src='{{friend.image_url}}' class="avatar-shortcut"></td>
                 <td>{{ friend.username }}</td>
-                <td>Send request</td>
+
+                <td id="{{'friend-'+friend.id }}" ng-click="subscribe(friend.id)">Subscribe</td>
             </tr>
         </table>
         {% endverbatim %}

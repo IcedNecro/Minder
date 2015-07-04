@@ -189,8 +189,11 @@ div.dialog-popup button:hover {
     border: 2px solid #FF6600;
 }
 
-#search-friend-result tr {
+
+#search-friend-result tr,
+ #search-friend-result input[type='text']{
     height: 50px;
+    color: #fff;
 }
 
 #search-friend-result tr td {

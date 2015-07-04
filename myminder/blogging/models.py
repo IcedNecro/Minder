@@ -31,6 +31,7 @@ class CustomUser(models.AbstractBaseUser):
     is_staff = md.BooleanField(default=True)
     is_active = md.BooleanField(default=True)
     is_superuser = md.BooleanField(default=True)
+    subscribed = md.ForeignKey('self', null=True, blank=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email', username]
