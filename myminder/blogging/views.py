@@ -4,6 +4,7 @@ from django.template import RequestContext, loader
 from forms import UploadAvatarForm
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
+from rest_framework.decorators import api_view
 import os
 
 def render_home_form(request):
@@ -34,3 +35,8 @@ def save_avatar(request):
         user.save()
 
     return HttpResponseRedirect(reverse('blog:home', args=()))
+
+@api_view(['POST',])
+def create_mind(request):
+    import ipdb; ipdb.set_trace()
+    request.POST

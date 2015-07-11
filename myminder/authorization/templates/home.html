@@ -5,10 +5,13 @@
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'authorization/css/left_menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'authorization/css/right_top_panel.css' %}">
     <script src="{% static 'authorization/js/left_menu.js' %}"></script>
+    <script src="{% static 'authorization/js/right_top_panel.js' %}"></script>
+
     <script src="{% static 'authorization/js/rest_controller.js' %}"></script>
 </head>
-<body ng-controller="rest-controller">
+<body ng-controller="rest-controller" id="controller-body">
     <div class="menu-wrapper">
         <div class="menu-pin">
             >
@@ -18,6 +21,21 @@
             <div class="user-space">
                 <img id='upload-avatar' class='avatar dialog-invoke' src="{{ avatar_url }}">
                 <p class="user-name">{{user}}</p>
+                <table class="stats-table">
+                    <tr >
+                        <td>Minds</td>
+                        <td>Fing</td>
+                        <td>Fers</td>
+                    </tr>
+                    {% verbatim %}
+                    <tr>
+                        <td>{{ user.minds }}</td>
+                        <td>{{ user.followers }}</td>
+                        <td>{{ user.following }}</td>
+                    </tr>
+                    {% endverbatim %}
+
+                </table>
             </div>
             <ul class="menu-list">
                 <li><div class="single-menu-node"><img src="{% static 'authorization/img/home4.svg' %}"><p>Home</p></div></li>
@@ -44,10 +62,29 @@
     </div>
 
     <div id="create-mind-dialog" title="Basic dialog">
-        <label class="row" for="create-mind-header">Mind name</label>
-        <input class="row" type="text" id="create-mind-header" >
+        {% verbatim %}
+        <label class="row" for="create-mind-header" >Mind name</label>
+        <input class="row" ng-name="mind.title" type="text" id="create-mind-header" >
         <label class="row" for="create-mind-text">Mind contatin:</label>
-        <textarea class="row" id="create-mind-text" ></textarea>
+        <textarea class="row" id="create-mind-text" ng-name="mind.text"></textarea>
+        {% endverbatim %}
+    </div>
+
+    <div class="right-top-info-panel">
+        <img id='upload-avatar' class='avatar dialog-invoke' src="{{ avatar_url }}">
+        <p class="user-name">{{user}}</p>
+        <table class="stats-table">
+            <tr >
+                <td>Minds</td>
+                <td>Fing</td>
+                <td>Fers</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>24</td>
+                <td>55</td>
+            </tr>
+        </table>
     </div>
 
     <div id="search-friend-dialog" title="Basic dialog">
@@ -58,16 +95,24 @@
             <input ng-model="name" type="text" id="search-friend-line" ng-keyup="getFriends(name)">
             <button class="search-friend-submit">Search..</button>
         </div>
+        <div class="table-container">
+            <table id="search-friend-result" class="row">
+                <!-- Place for Angular controller -->
+                <tr ng-repeat="friend in friends">
+                    <td><img ng-src='{{friend.user.image_url}}' class="avatar-shortcut"></td>
+                    <td>{{ friend.user.username }}</td>
 
-        <table id="search-friend-result" class="row">
-            <!-- Place for Angular controller -->
-            <tr ng-repeat="friend in friends">
-                <td><img ng-src='{{friend.image_url}}' class="avatar-shortcut"></td>
-                <td>{{ friend.username }}</td>
-
-                <td id="{{'friend-'+friend.id }}" ng-click="subscribe(friend.id)">Subscribe</td>
-            </tr>
-        </table>
+                    <td id="{{'friend-'+friend.user.id }}" ng-click="subscribe(friend.user.id)"
+                        ng-if="friend.alreadySubscribed==true" class="unsubscribe-button">
+                        <p >Unsubscribe</p>
+                    </td>
+                    <td id="{{'friend-'+friend.user.id }}" ng-click="subscribe(friend.user.id)"
+                        ng-if="friend.alreadySubscribed==false" class="subscribe-button">
+                        <p >Subscribe</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
         {% endverbatim %}
     </div>
     <div id="upload-avatar-dialog">

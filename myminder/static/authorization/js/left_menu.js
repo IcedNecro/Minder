@@ -7,10 +7,10 @@ $(document).ready(function(){
 
     $('.menu-pin').click(function(){
         if(isShown) {
-            $('.menu-wrapper').animate({ left:'-=200'}, 200);
+            $('.menu-wrapper').animate({ left:'-=220'}, 200);
             isShown = false;
         } else {
-            $('.menu-wrapper').animate({ left:'+=200'}, 200);
+            $('.menu-wrapper').animate({ left:'+=220'}, 200);
             isShown = true;
         }
     })
@@ -37,9 +37,16 @@ $(document).ready(function(){
         buttons: [{
             text: 'ok',
             click: function() {
+                angular.element(document.getElementById('controller-body')).scope().postMind();
                 $('#create-mind-dialog').dialog('close');
             }
-        },]
+        },{
+            text: 'Cancel',
+            click: function() {
+                $('#create-mind-dialog').dialog('close');
+            }
+        },
+        ]
     });
 
     $( "#search-friend-dialog" ).dialog({

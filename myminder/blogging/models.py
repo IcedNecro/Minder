@@ -28,10 +28,11 @@ class CustomUser(models.AbstractBaseUser):
     image_url = md.CharField(max_length=100)
     email = md.CharField(max_length=100)
     objects = CustomUserManager()
-    is_staff = md.BooleanField(default=True)
+    is_staff = md.BooleanField(default=False)
     is_active = md.BooleanField(default=True)
-    is_superuser = md.BooleanField(default=True)
-    subscribed = md.ForeignKey('self', null=True, blank=True)
+    is_superuser = md.BooleanField(default=False)
+    following = md.ManyToManyField('self', symmetrical=False, null=True, blank=True, related_name='following_set')
+    followers = md.ManyToManyField('self', symmetrical=False, blank=True, null=True, related_name='followers_set')
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email', username]
@@ -48,3 +49,7 @@ class CustomUser(models.AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+class Mind(md.Model):
+    title = md.CharField(max_length=100)
+    text = md.CharField(max_length=2048)
+    author = md.ForeignKey(CustomUser)

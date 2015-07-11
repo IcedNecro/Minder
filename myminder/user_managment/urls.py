@@ -5,7 +5,10 @@ from views import *
 from . import views
 
 urlpatterns = [
-    url('^get/', views.UserViewSet.as_view()),
-    url('^log_out/', views.logout),
-    url(r'^subscribe/', views.subscribe)
+    url(r'^get/', views.get_users_by_name),
+    url(r'^following/', views.FollowingUsers.as_view()),
+    url(r'^followers/', views.Followers.as_view()),
+    url(r'^log_out/', views.logout),
+    url(r'^subscribe/', views.subscribe),
+    url(r'^stats/', views.get_user_stats)
 ]
