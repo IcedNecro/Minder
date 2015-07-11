@@ -30,8 +30,8 @@
                     {% verbatim %}
                     <tr>
                         <td>{{ user.minds }}</td>
-                        <td>{{ user.followers }}</td>
                         <td>{{ user.following }}</td>
+                        <td>{{ user.followers }}</td>
                     </tr>
                     {% endverbatim %}
 
@@ -64,14 +64,14 @@
     <div id="create-mind-dialog" title="Basic dialog">
         {% verbatim %}
         <label class="row" for="create-mind-header" >Mind name</label>
-        <input class="row" ng-name="mind.title" type="text" id="create-mind-header" >
+        <input class="row" ng-model="mind.title" type="text" id="create-mind-header" >
         <label class="row" for="create-mind-text">Mind contatin:</label>
-        <textarea class="row" id="create-mind-text" ng-name="mind.text"></textarea>
+        <textarea class="row" id="create-mind-text" ng-model="mind.text"></textarea>
         {% endverbatim %}
     </div>
 
     <div class="right-top-info-panel">
-        <img id='upload-avatar' class='avatar dialog-invoke' src="{{ avatar_url }}">
+        <img class='avatar dialog-invoke' src="{{ avatar_url }}">
         <p class="user-name">{{user}}</p>
         <table class="stats-table">
             <tr >

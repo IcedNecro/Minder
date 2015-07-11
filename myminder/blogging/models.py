@@ -52,4 +52,4 @@ class CustomUser(models.AbstractBaseUser):
 class Mind(md.Model):
     title = md.CharField(max_length=100)
     text = md.CharField(max_length=2048)
-    author = md.ForeignKey(CustomUser)
+    author = md.ForeignKey(CustomUser, related_name='author')

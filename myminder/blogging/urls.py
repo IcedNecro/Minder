@@ -6,5 +6,5 @@ from . import views
 urlpatterns = [
     url(r'^page/', views.render_home_form, name='home'),
     url(r'^upload_avatar/', views.save_avatar, name='upload_avatar'),
-    url(r'^post_mind/', views.create_mind)
+    url(r'^postmind/', views.create_mind)
 ]

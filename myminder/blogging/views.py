@@ -5,6 +5,10 @@ from forms import UploadAvatarForm
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from rest_framework.decorators import api_view
+from . import serializers
+from rest_framework.response import Response
+from rest_framework import status
+
 import os
 
 def render_home_form(request):
@@ -39,4 +43,16 @@ def save_avatar(request):
 @api_view(['POST',])
 def create_mind(request):
     import ipdb; ipdb.set_trace()
-    request.POST
+    if request.method == 'POST':
+        id = request.user.id
+
+        data = request.data
+        data['author'] = id
+        mind = serializers.MindSerializer(data=data)
+        if mind.is_valid():
+            mind.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+

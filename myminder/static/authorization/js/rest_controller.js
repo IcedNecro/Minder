@@ -35,7 +35,7 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     $scope.postMind = function() {
         var data = $scope.mind;
 
-        $http.post().success(function() {
+        $http.post('http://localhost:8000/home/postmind/', data).success(function() {
 
         });
     }
