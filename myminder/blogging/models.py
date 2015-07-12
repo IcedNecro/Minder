@@ -25,7 +25,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(models.AbstractBaseUser):
     username = md.CharField(max_length=40, unique=True)
-    image_url = md.CharField(max_length=100)
+    image_url = md.CharField(max_length=100,default="/static/users/default/avatar.svg")
     email = md.CharField(max_length=100)
     objects = CustomUserManager()
     is_staff = md.BooleanField(default=False)
@@ -49,7 +49,12 @@ class CustomUser(models.AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+class MindCategory(md.Model):
+    authors = md.ManyToManyField(CustomUser, related_name='categories',blank=True, null=True,)
+    category_title = md.TextField(max_length=100)
+
 class Mind(md.Model):
     title = md.CharField(max_length=100)
     text = md.CharField(max_length=2048)
     author = md.ForeignKey(CustomUser, related_name='author')
+    category = md.ManyToManyField(MindCategory, related_name='minds_related', blank=True, null=True)

@@ -8,6 +8,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from . import serializers
 from . import util
+import json
 
 @api_view(['GET',])
 def get_users_by_name(request):
@@ -28,17 +29,17 @@ def get_users_by_name(request):
 def get_user_stats(request):
     #import ipdb; ipdb.set_trace()
     if request.method == 'GET':
-        try:
-            id = request.get['id']
-        except:
+
+        id = request.QUERY_PARAMS.dict().get('id')
+        if id is None:
             id = request.user.id
 
         user = get_user_model().objects.get(pk=id)
-        minds = 0
+        minds = user.author.count()
         following = user.following.count()
         followers = user.followers.count()
 
-        return Response(serializers.StatsSerializer(util.Stats(minds, following, followers)).data)
+        return Response(serializers.StatsSerializer(util.Stats(minds, following, followers, user)).data)
 
 class FollowingUsers(generics.ListAPIView):
     serializer_class = serializers.UserSerializer
@@ -81,4 +82,75 @@ def subscribe(request):
         to_subscribe.save()
         return Response(status=status.HTTP_200_OK)
 
+@api_view(['GET',])
+def get_subscribers_graph(request):
 
+    if request.method == 'GET':
+        resp = {'nodes':[], 'links':[]}
+        u_id = request.QUERY_PARAMS.dict().get('id')
+        if u_id is None:
+            u_id = request.user.id
+
+        user = get_user_model().objects.get(pk=u_id)
+        resp['nodes'].append(user)
+        following = user.following.all()
+        i=1
+        for f in following:
+            resp['nodes'].append(f)
+            resp['links'].append({'source':i, 'target':0, 'value':20})
+            i+=1
+        buffer = [serializers.UserSerializer(user).data]
+
+        for i in range(1,len(resp['nodes'])):
+            u = resp['nodes'][i]
+            following = u.following.all()
+
+            for f in following:
+                try:
+                    index = resp['nodes'].index(f)
+                    resp['links'].append({'source':i, 'target':index, 'value':10})
+                except:
+                    pass
+
+            buffer.append(serializers.UserSerializer(u).data)
+
+        resp['nodes'] = buffer
+
+        return Response(resp)
+
+@api_view(['GET',])
+def get_followers_graph(request):
+
+    if request.method == 'GET':
+        resp = {'nodes':[], 'links':[]}
+
+        u_id = request.QUERY_PARAMS.dict().get('id')
+        if u_id is None:
+            u_id = request.user.id
+
+        user = get_user_model().objects.get(pk=u_id)
+        resp['nodes'].append(user)
+        followers = user.followers.all()
+        i=1
+        for f in followers:
+            resp['nodes'].append(f)
+            resp['links'].append({'source':i, 'target':0, 'value':20})
+            i+=1
+        buffer = [serializers.UserSerializer(user).data]
+
+        for i in range(1,len(resp['nodes'])):
+            u = resp['nodes'][i]
+            following = u.following.all()
+
+            for f in following:
+                try:
+                    index = resp['nodes'].index(f)
+                    resp['links'].append({'source':i, 'target':index, 'value':10})
+                except:
+                    pass
+
+            buffer.append(serializers.UserSerializer(u).data)
+
+        resp['nodes'] = buffer
+
+        return Response(resp)

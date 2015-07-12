@@ -7,9 +7,19 @@ from django.core.urlresolvers import reverse
 from rest_framework.decorators import api_view
 from . import serializers
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
+from . import models
 
 import os
+
+class MindsList(generics.ListAPIView):
+    serializer_class = serializers.CategorySerializer
+
+    def get_queryset(self):
+        #import ipdb; ipdb.set_trace()
+        name = self.request.QUERY_PARAMS['name']
+        filtered = models.MindCategory.objects.filter(category_title__contains=name)
+        return filtered
 
 def render_home_form(request):
     template = loader.get_template('templates/home.html')
@@ -42,17 +52,16 @@ def save_avatar(request):
 
 @api_view(['POST',])
 def create_mind(request):
-    import ipdb; ipdb.set_trace()
+    #import ipdb; ipdb.set_trace()
     if request.method == 'POST':
         id = request.user.id
-
+        user = get_user_model().objects.get(pk=id)
         data = request.data
-        data['author'] = id
-        mind = serializers.MindSerializer(data=data)
-        if mind.is_valid():
-            mind.save()
-            return Response(status=status.HTTP_201_CREATED)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+        categories = models.MindCategory.objects.filter(pk__in=data["categories"])
 
+        mind = models.Mind.objects.create(author=user, title=data['title'], text=data['text'])
+        for c in categories:
+            mind.category.add(c)
 
+        mind.save()
+        return Response(status=status.HTTP_201_CREATED)

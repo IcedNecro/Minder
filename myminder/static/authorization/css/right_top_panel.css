@@ -1,5 +1,5 @@
 .right-top-info-panel {
-    height: 400px;
+
     width: 200px;
     position: absolute;
     top: 10px;
@@ -7,8 +7,46 @@
     border-radius: 20px;
     background-color: #444444;
     box-shadow: 0 0 10px black;
+    padding:20px;
+    z-index: 50;
+    transition: 0.2s all;
+    -webkit-transition: 0.2s all;
+    -moz-transition: 0.2s all;
+    transition-timing-function: ease-in;
+    -webkit-transition-timing-function: ease-in;
+    -moz-transition-timing-function: ease-in;
+
 }
 
+.hidden-panel {
+    transition: 0.2s all;
+    -webkit-transition: 0.2s all;
+    -moz-transition: 0.2s all;
+    right:-240px;
+}
 .right-top-info-panel img {
     width: inherit;
-}}
+}
+
+.close-panel {
+    width:40px;
+    position: absolute;
+    font-size: 40px;
+    height:40px;
+    border-radius:20px;
+    background-color: #FF6600;
+}
+
+.close-panel p {
+    padding-left:3px;
+    padding-left: 3px;
+    position: absolute;
+    top: -3px;
+
+    background-color: #565656;
+    color: transparent;
+    text-shadow: 0px 0px 7px #FF6600;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+}

@@ -12,3 +12,4 @@ class StatsSerializer(serializers.Serializer):
     minds = serializers.IntegerField()
     followers = serializers.IntegerField()
     following = serializers.IntegerField()
+    user = UserSerializer()

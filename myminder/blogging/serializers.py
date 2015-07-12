@@ -9,3 +9,9 @@ class MindSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Mind
         fields = ['title', 'text', 'author']
+
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.MindCategory
+        fields = ['id', 'category_title']

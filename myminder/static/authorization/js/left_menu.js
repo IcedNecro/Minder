@@ -28,12 +28,22 @@ $(document).ready(function(){
             $(id).slideUp();
         }
 
-    })
+    });
+
+    $(".add-category-button").click(function() {
+        var id = ".category-labels-selector";
+        if($(id).css('display')=='none')
+            $(id).slideDown();
+        else {
+            $(id).slideUp();
+        }        
+    });
 
     $( "#create-mind-dialog" ).dialog({
         modal:true,
         autoOpen: false,
         dialogClass: 'dialog-popup',
+        width: "500px",
         buttons: [{
             text: 'ok',
             click: function() {

@@ -8,34 +8,38 @@
     <link rel="stylesheet" type="text/css" href="{% static 'authorization/css/right_top_panel.css' %}">
     <script src="{% static 'authorization/js/left_menu.js' %}"></script>
     <script src="{% static 'authorization/js/right_top_panel.js' %}"></script>
-
+    <script src="{% static 'authorization/js/subscribers.js' %}"></script>
     <script src="{% static 'authorization/js/rest_controller.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+
 </head>
 <body ng-controller="rest-controller" id="controller-body">
+
     <div class="menu-wrapper">
         <div class="menu-pin">
-            >
+
         </div>
 
         <div class="menu">
             <div class="user-space">
-                <img id='upload-avatar' class='avatar dialog-invoke' src="{{ avatar_url }}">
-                <p class="user-name">{{user}}</p>
+                {% verbatim %}
+                <img id='upload-avatar' class='avatar dialog-invoke' src="{{ user.user.image_url }}">
+                <p class="user-name">{{user.user.username}}</p>
                 <table class="stats-table">
                     <tr >
                         <td>Minds</td>
                         <td>Fing</td>
                         <td>Fers</td>
                     </tr>
-                    {% verbatim %}
+                    
                     <tr>
                         <td>{{ user.minds }}</td>
-                        <td>{{ user.following }}</td>
-                        <td>{{ user.followers }}</td>
+                        <td ng-click="getSubscribersGraph()">{{ user.following }}</td>
+                        <td ng-click="getFollowersGraph()">{{ user.followers }}</td>
                     </tr>
-                    {% endverbatim %}
 
                 </table>
+                {% endverbatim %}
             </div>
             <ul class="menu-list">
                 <li><div class="single-menu-node"><img src="{% static 'authorization/img/home4.svg' %}"><p>Home</p></div></li>
@@ -65,26 +69,52 @@
         {% verbatim %}
         <label class="row" for="create-mind-header" >Mind name</label>
         <input class="row" ng-model="mind.title" type="text" id="create-mind-header" >
+        <div class="row categories">
+            <ul class="category-line" >
+                <li ng-repeat="cat in selectedCats" ng-click="removeCategory(cat)"><p>{{ cat.category_title }}</p></li>
+            </ul>
+            <button class="add-category-button">+ Add</button>
+            <div class="row category-labels-selector">
+                <label for="category-name">Category: </label>
+                <input type='text' id="category-name" ng-model="cat_name" ng-keyup="getCategories(cat_name)">
+                <ul class="category-line" >
+                    <li class="select-category" ng-repeat="cat in categories" ng-click="addCategory(cat)"><p>{{ cat.category_title }}</p></li>
+                </ul>
+            </div>    
+
+        </div>
         <label class="row" for="create-mind-text">Mind contatin:</label>
         <textarea class="row" id="create-mind-text" ng-model="mind.text"></textarea>
         {% endverbatim %}
     </div>
 
     <div class="right-top-info-panel">
-        <img class='avatar dialog-invoke' src="{{ avatar_url }}">
-        <p class="user-name">{{user}}</p>
+        {% verbatim %}
+        <div class="close-panel"><p>⨯</p></div>
+        <img class='avatar dialog-invoke' ng-src="{{ anotherUser.user.image_url }}">
+        <p class="user-name">{{ anotherUser.user.username }}</p>
         <table class="stats-table">
-            <tr >
+            <tr>
                 <td>Minds</td>
                 <td>Fing</td>
                 <td>Fers</td>
             </tr>
             <tr>
-                <td>100</td>
-                <td>24</td>
-                <td>55</td>
+                <td >{{ anotherUser.minds}}</td>
+                <td ng-click="getSubscribersGraph(anotherUser.user.id)">{{ anotherUser.following}}</td>
+                <td ng-click="getFollowersGraph(anotherUser.user.id)">{{ anotherUser.followers}}</td>
             </tr>
         </table>
+
+        <button ng-click="subscribe(anotherUser.user.id)"
+            ng-if="anotherUser.alreadySubscribed==true" class="unsubscribe-button">
+            <p >Unsubscribe</p>
+        </button>
+        <button ng-click="subscribe(anotherUser.user.id)"
+            ng-if="anotherUser.alreadySubscribed==false" class="subscribe-button">
+            <p >Subscribe</p>
+        </button>
+        {% endverbatim %}
     </div>
 
     <div id="search-friend-dialog" title="Basic dialog">
@@ -122,5 +152,6 @@
             <input type="submit" value="Submit">
         </form>
     </div>
+    <svg></svg>
 </body>
 </html>

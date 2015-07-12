@@ -1,9 +1,19 @@
+svg {
+    position: absolute;
+    top:0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
 body,p {
     margin: 0;
 }
 
 div.menu-wrapper {
     position: relative;
+    z-index: 50;
+    width:250px;
 }
 
 .hidden {
@@ -218,6 +228,9 @@ div.dialog-popup textarea,
 div.dialog-popup input[type='text'] {
     background-color: #222222;
     border: 2px solid #FF6600;
+    color: white;
+    padding: 10px;
+    width: 100%;
 }
 
 div.dialog-popup button {
@@ -296,3 +309,81 @@ div.dialog-popup button:hover {
 }
 
 /* search friend dialog specific */
+
+/* create-mind dialog */
+
+#create-mind-dialog {
+    height:500px;
+}
+
+#create-mind-dialog textarea{
+    height: 500px;
+}
+
+#create-mind-dialog input[type="text"] {
+    height: 50px;
+}
+
+.categories {
+    position: relative;
+    height: 30px;
+}
+
+.categories button {
+    position: absolute;
+    right: 0px;
+}
+
+.category-line {
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+}
+
+.category-line {
+    padding: 0;
+}
+
+.category-line li {
+    background: rgb(0,183,234); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(0,183,234,1) 0%, rgba(0,158,195,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,183,234,1)), color-stop(100%,rgba(0,158,195,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 ); /* IE6-9 */   padding: 5px;
+    display: inline-block;
+    margin: 0;
+    margin-left: 2px;
+}
+
+.category-line li p {
+    position: relative;
+    padding-right: 20px;
+} 
+
+.category-line li p:after {
+    content: "×";
+    position: absolute;
+    right: 2px;
+    font-weight:bolder;
+}
+.category-line li p:hover:after{
+    color: blue;
+}
+
+.category-labels-selector {
+    position: absolute;
+    margin-top: 25px; 
+    background-color: #444444;
+    padding: 5px;
+    display:none;
+    border: 1px solid white;
+}
+
+/* create-mind dialog */
+
+line {
+    stroke:rgb(255,0,0);stroke-width:2
+}
