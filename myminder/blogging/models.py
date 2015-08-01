@@ -2,6 +2,9 @@ from django.contrib.auth import models
 from django.db import models as md
 from django.contrib.auth.models import BaseUserManager
 
+from mptt.models import MPTTModel
+from mptt.models import TreeForeignKey
+
 # Create your models here.
 
 class CustomUserManager(BaseUserManager):
@@ -53,8 +56,15 @@ class MindCategory(md.Model):
     authors = md.ManyToManyField(CustomUser, related_name='categories',blank=True, null=True,)
     category_title = md.TextField(max_length=100)
 
-class Mind(md.Model):
+    def __unicode__(self):
+        return self.category_title
+
+class Mind(MPTTModel):
     title = md.CharField(max_length=100)
     text = md.CharField(max_length=2048)
     author = md.ForeignKey(CustomUser, related_name='author')
     category = md.ManyToManyField(MindCategory, related_name='minds_related', blank=True, null=True)
+    parent = TreeForeignKey('self', null=True)
+
+    def __unicode__(self):
+        return self.title

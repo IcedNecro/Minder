@@ -45,17 +45,17 @@ $(document).ready(function(){
         dialogClass: 'dialog-popup',
         width: "500px",
         buttons: [{
-            text: 'ok',
-            click: function() {
-                angular.element(document.getElementById('controller-body')).scope().postMind();
-                $('#create-mind-dialog').dialog('close');
-            }
-        },{
-            text: 'Cancel',
-            click: function() {
-                $('#create-mind-dialog').dialog('close');
-            }
-        },
+                text: 'ok',
+                click: function() {
+                    angular.element(document.getElementById('controller-body')).scope().postMind();
+                    $('#create-mind-dialog').dialog('close');
+                }
+            },{
+                text: 'Cancel',
+                click: function() {
+                    $('#create-mind-dialog').dialog('close');
+                }
+            },
         ]
     });
 
@@ -71,6 +71,7 @@ $(document).ready(function(){
             }
         },]
     })
+
     $( "#upload-avatar-dialog" ).dialog({
         modal:true,
         autoOpen: false,
@@ -84,4 +85,23 @@ $(document).ready(function(){
         },]
     })
 
+    $( "#log-out-dialog" ).dialog({
+        modal:true,
+        autoOpen: false,
+        dialogClass: 'dialog-popup',
+        width: "500px",
+        buttons: [{
+            text: 'Ok',
+            click: function() {
+                angular.element(document.getElementById('controller-body')).scope().logoutRequest();
+                $('#search-friend-dialog').dialog('close');
+            }
+        },
+        {
+            text: 'Cancel',
+            click: function() {
+                $('#search-friend-dialog').dialog('close');
+            }
+        },]
+    })
 })

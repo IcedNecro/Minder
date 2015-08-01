@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^get/', views.get_users_by_name),
     url(r'^following/', views.FollowingUsers.as_view()),
     url(r'^followers/', views.Followers.as_view()),
-    url(r'^log_out/', views.logout),
+    url(r'^log_out/', views.log_out_user),
     url(r'^subscribe/', views.subscribe),
     url(r'^stats/', views.get_user_stats),
     url(r'^graph/subscribers/', views.get_subscribers_graph),

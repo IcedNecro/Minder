@@ -1,8 +1,27 @@
-<form action="{% url 'auth:success_login' %}" method="post">
-    {% csrf_token %}
-    <label for="reg-login">Login:</label>
-    <input id='reg-login' type="text" name="login">
-    <label for="reg-passwd">Password:</label>
-    <input id='reg-passwd' type="password" name="passwd">
-    <input type="submit">
-</form>
+<html>
+<head>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'auth/css/auth.css' %}">
+</head>
+<body>
+    <div class="content">
+        <form action="{% url 'auth:success_login' %}" method="post">
+            {{ message }}
+            {% csrf_token %}
+                <div class="row">
+                    <label for="reg-login">Login:</label>
+                    <!--<input id='reg-login' type="text" name="login">-->
+                    {{form.login}}
+                </div>
+                <div class="row">
+                    <label for="reg-passwd">Password:</label>
+                    <!--<input id='reg-passwd' type="password" name="passwd">-->
+                    {{form.password}}
+                </div>
+            <div class="row">
+                <input type="submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

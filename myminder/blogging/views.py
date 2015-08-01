@@ -9,6 +9,7 @@ from . import serializers
 from rest_framework.response import Response
 from rest_framework import status, generics
 from . import models
+from django.contrib.auth.decorators import login_required
 
 import os
 
@@ -21,7 +22,30 @@ class MindsList(generics.ListAPIView):
         filtered = models.MindCategory.objects.filter(category_title__contains=name)
         return filtered
 
+@login_required
+@api_view(['GET',])
+def get_mind_tree(request):
+
+    try:
+        uid = request.user.id
+    except:
+        uid = request.query_params.get('uid')
+
+    import ipdb; ipdb.set_trace()
+    minds_list = models.Mind.objects.filter(author_id=uid)
+    mind_categories = minds_list.values_list('category', flat=True).distinct()
+
+    mind_categories = models.MindCategory.objects.filter(pk__in=mind_categories)
+    result = {'nodes': mind_categories, 'links': []}
+
+    for mind in minds_list:
+        result['nodes'].append(mind)
+        import ipdb; ipdb.set_trace()
+
+
+@login_required
 def render_home_form(request):
+    ipdb.set_trace() #import ipdb; ipdb.set_trace()
     template = loader.get_template('templates/home.html')
     form = UploadAvatarForm(request.POST, request.FILES)
     context = RequestContext(request, {
@@ -32,6 +56,7 @@ def render_home_form(request):
 
     return HttpResponse(template.render(context))
 
+@login_required
 def save_avatar(request):
 
     if request.method == 'POST':
@@ -50,6 +75,7 @@ def save_avatar(request):
 
     return HttpResponseRedirect(reverse('blog:home', args=()))
 
+@login_required
 @api_view(['POST',])
 def create_mind(request):
     #import ipdb; ipdb.set_trace()
@@ -59,7 +85,7 @@ def create_mind(request):
         data = request.data
         categories = models.MindCategory.objects.filter(pk__in=data["categories"])
 
-        mind = models.Mind.objects.create(author=user, title=data['title'], text=data['text'])
+        mind = models.Mind.objects.create(author=user, title=data['title'], text=data['text'], parent=None)
         for c in categories:
             mind.category.add(c)
 

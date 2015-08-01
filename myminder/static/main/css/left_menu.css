@@ -385,5 +385,9 @@ div.dialog-popup button:hover {
 /* create-mind dialog */
 
 line {
-    stroke:rgb(255,0,0);stroke-width:2
+    stroke:rgb(255,0,0);stroke-width:2;
+}
+
+image {
+    border-radius: 25px;
 }

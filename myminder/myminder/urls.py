@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^auth/', include('authorization.urls', namespace='auth')),
     url(r'^home/', include('blogging.urls', namespace='blog')),
-    url(r'^user/', include('user_managment.urls', namespace='user'))
+    url(r'^user/', include('user_managment.urls', namespace='user')),
+    url(r'^.*', 'blogging.views.render_home_form')
 ]

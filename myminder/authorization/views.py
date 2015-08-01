@@ -6,7 +6,7 @@ from django.template import RequestContext, loader
 from django.contrib.auth import get_user_model
 
 from django.contrib.auth import authenticate, login
-
+from . import models
 # Create your views here.
 
 def render_registration_form(request):
@@ -17,7 +17,7 @@ def render_registration_form(request):
 
 def render_login_form(request):
     template = loader.get_template('templates/login.html')
-    context = RequestContext(request, {})
+    context = RequestContext(request, {"form": models.LoginForm()})
 
     return HttpResponse(template.render(context))
 
@@ -31,11 +31,16 @@ def retrieve_registration_form(request):
     return HttpResponseRedirect(reverse('auth:login', args=()))
 
 def retrieve_login_form(request):
-    username = request.POST.get('login')
-    passwd = request.POST.get('passwd')
+    form = models.LoginForm(request.POST)
 
-    user = authenticate(username=username, password=passwd)
+    if form.is_valid():
+        user = authenticate(username=request.POST['login'], password=request.POST["password"])
 
-    if user is not None:
-        login(request, user)
-        return HttpResponseRedirect(reverse('blog:home', args=()))
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse('blog:home', args=()))
+    else:
+        template = loader.get_template('templates/login.html')
+        context = RequestContext(request, {"form": models.LoginForm(), "message": "incorrect input"})
+
+        return HttpResponse(template.render(context))

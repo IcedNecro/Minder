@@ -22,7 +22,9 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     }
 
     $scope.logoutRequest = function() {
-        $http.post('http://localhost:8000/user/log_out/')
+        $http.post('http://localhost:8000/user/log_out/').success(function(){
+            window.location.replace('/home/page');
+        })
     }
 
     $scope.subscribe = function(id) {
@@ -43,6 +45,16 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
         $http.post('http://localhost:8000/home/postmind/', data).success(function() {
 
         });
+    }
+
+    $scope.getMindTree = function(id) {
+        var request;
+        if(!id) {
+            request = $http.get('http://localhost:8000/home/minds/')
+            request.success(function(data, status, headers, config) {
+                $scope.mind_tree = data
+            })
+        }
     }
 
     $scope.getUserStats  = function(id) {
@@ -112,5 +124,5 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
 
     $scope.getUserStats();
     $scope.getSubscribersGraph();
-});
+})
 
