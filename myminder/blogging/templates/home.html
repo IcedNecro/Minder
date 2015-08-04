@@ -155,6 +155,15 @@
     <div id="log-out-dialog">
         <p>Are you sure you want to log out?</p>
     </div>
+
+    <div id="display-mind-dialog">
+        {% verbatim %}
+        <h1> {{ mind.title }}</h1>
+        <textarea>
+            {{ mind.text }}
+        </textarea>
+        {% endverbatim %}
+    </div>
     <svg></svg>
 </body>
 </html>

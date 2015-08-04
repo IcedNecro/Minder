@@ -31,21 +31,41 @@ def get_mind_tree(request):
     except:
         uid = request.query_params.get('uid')
 
-    import ipdb; ipdb.set_trace()
+    #import ipdb; ipdb.set_trace()
     minds_list = models.Mind.objects.filter(author_id=uid)
     mind_categories = minds_list.values_list('category', flat=True).distinct()
 
     mind_categories = models.MindCategory.objects.filter(pk__in=mind_categories)
-    result = {'nodes': mind_categories, 'links': []}
+    result = {'nodes': [{'title':cat.category_title, 'type':'category', 'id': cat.id} for cat in mind_categories], 'links': []}
+    id_map = {'cat_'+str(mind_categories[i].id): i for i in range(len(result))}
+    i = len(mind_categories)
+
+    links = []
 
     for mind in minds_list:
-        result['nodes'].append(mind)
-        import ipdb; ipdb.set_trace()
+        result['nodes'].append({
+            'title': mind.title,
+            'id': mind.id,
+            'type': 'mind'
+        })
+        id = 'mind_'+str(mind.id)
+        if mind.parent:
+            mind_id = 'mind_'+str(mind.parent.id)
+            index = id_map[mind_id]
+            links.append({'source': index, 'target': i})
+        for cat in mind.category.values():
+            cat_id = 'cat_'+str(cat['id'])
+            index = id_map[cat_id]
+            links.append({'source': index, 'target': i})
+        id_map[id] = i
+        i += 1
+    result['links'] = links
+    return Response(result)
 
 
 @login_required
 def render_home_form(request):
-    ipdb.set_trace() #import ipdb; ipdb.set_trace()
+    #import ipdb; ipdb.set_trace()
     template = loader.get_template('templates/home.html')
     form = UploadAvatarForm(request.POST, request.FILES)
     context = RequestContext(request, {

@@ -20,6 +20,8 @@ $(document).ready(function(){
         $(dialog).dialog('open');
     })
 
+    $()
+
     $('.expandable').click(function() {
         var id = '.'+$(this)[0].id;
         if($(id).css('display')=='none')
@@ -94,14 +96,28 @@ $(document).ready(function(){
             text: 'Ok',
             click: function() {
                 angular.element(document.getElementById('controller-body')).scope().logoutRequest();
-                $('#search-friend-dialog').dialog('close');
+                $('#log-out-dialog').dialog('close');
             }
         },
         {
             text: 'Cancel',
             click: function() {
-                $('#search-friend-dialog').dialog('close');
+                $('#log-out-dialog').dialog('close');
             }
         },]
+    })
+
+    $('#display-mind-dialog').dialog({
+        modal:true,
+        autoOpen: false,
+        dialogClass: 'dialog-popup',
+        width: "500px",
+        buttons: [{
+            text: 'Ok',
+            click: function() {
+                //angular.element(document.getElementById('controller-body')).scope().logoutRequest();
+                $('#display-mind-dialog').dialog('close');
+            }
+        },
     })
 })

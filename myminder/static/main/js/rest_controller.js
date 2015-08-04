@@ -9,6 +9,9 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     $scope.friend_request_str = ''
     $scope.selectedCats = []
     $scope.categories = []
+    $scope.graph = new GraphVisualization()
+
+
     $scope.getFriends = function (str) {
 
         $http.get("http://localhost:8000/user/get/?name="+str)
@@ -53,6 +56,9 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
             request = $http.get('http://localhost:8000/home/minds/')
             request.success(function(data, status, headers, config) {
                 $scope.mind_tree = data
+                $scope.graph.drawNode =  mindsGraphNode;
+                $scope.graph.onClickCallback = mindsClickCallback;
+                $scope.graph.drawGraph(data);
             })
         }
     }
@@ -85,7 +91,9 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
         var res = {}
 
         request.then(function(data, status, headers, config){
-            drawGraph(data.data);
+            $scope.graph.drawNode =  subscribersGraphNode;
+            $scope.graph.onClickCallback = subscribersGraphCallback;
+            $scope.graph.drawGraph(data.data);
         })
         //return res.resolve();
     }
@@ -100,7 +108,9 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
         var res = {}
 
         request.then(function(data, status, headers, config){
-            drawGraph(data.data);
+            $scope.graph.drawNode =  subscribersGraphNode;
+            $scope.graph.onClickCallback = subscribersGraphCallback;
+            $scope.graph.drawGraph(data.data);
         })
         //return res.resolve();
     }
@@ -120,6 +130,10 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
 
     $scope.addCategory = function(cat) {
         $scope.selectedCats.push(cat);
+    }
+
+    $scope.requestFullMind = function(id) {
+        $http.get("http://localhost:8000/home/minds/"+id)
     }
 
     $scope.getUserStats();
