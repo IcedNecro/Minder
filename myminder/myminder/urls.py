@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^auth/', include('authorization.urls', namespace='auth')),
     url(r'^home/', include('blogging.urls', namespace='blog')),
     url(r'^user/', include('user_managment.urls', namespace='user')),
-    url(r'^.*', 'blogging.views.render_home_form')
+    url(r'^.*', 'authorization.views.handle_all')
 ]

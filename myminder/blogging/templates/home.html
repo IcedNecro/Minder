@@ -1,11 +1,6 @@
 <html ng-app="rest_app">
 <head>
     {% load staticfiles %}
-    <script src="{% static 'libs/angular.min.js' %}"></script>
-    <script src="{% static 'libs/jquery-2.1.4.min.js' %}"></script>
-    <script src="{% static 'libs/d3.min.js' %}"></script>
-    <script src="{% static 'libs/jquery-ui.js' %}"></script>
-
 
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -50,7 +45,6 @@
                 {% endverbatim %}
             </div>
             <ul class="menu-list">
-                <li><div class="single-menu-node"><img src="{% static 'main/img/home4.svg' %}"><p>Home</p></div></li>
                 <li>
                     <div id="cat-friends" class="single-menu-node expandable"><img src="{% static 'main/img/multiple25.svg' %}"><p>Friends</p></div>
                     <ul class="menu-sublist cat-friends">
@@ -59,8 +53,6 @@
                         <li id="search-friend" class="dialog-invoke">Search</li>
                     </ul>
                 </li>
-                <li><div class="single-menu-node"><img src="{% static 'main/img/leader.svg' %}"><p>Groups</p></div></li>
-                <li><div class="single-menu-node"><img src="{% static 'main/img/invisible2.svg' %}"><p>Anonymous</p></div></li>
                 <li ng-click="getMindTree()"><div class="single-menu-node"><p>Minds</p></div></li>
                 <li id="create-mind" class="dialog-invoke"><div class="single-menu-node"><img src="{% static 'main/img/dreaming.svg' %}"><p>Share your mind...</p></div></li>
                 <li id="log-out" class="dialog-invoke">

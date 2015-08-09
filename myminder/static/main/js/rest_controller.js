@@ -5,7 +5,6 @@ var rest_controller = angular.module('rest_app', []).config(['$httpProvider', fu
 
 rest_controller.controller('rest-controller', function ($scope, $http) {
 
-    $scope.friends = ['friend_1', 'friend_2', 'friend_3', 'friend_4'];
     $scope.friend_request_str = ''
     $scope.selectedCats = []
     $scope.categories = []
@@ -13,7 +12,7 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
 
     $scope.getFriends = function (str) {
 
-        $http.get("http://localhost:8000/user/get/?name="+str)
+        $http.get("/user/get/?name="+str)
             .success(function(data, status, headers, config) {
                 $scope.friends = data;
                 $scope.friend_request_str = str;
@@ -24,7 +23,7 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     }
 
     $scope.logoutRequest = function() {
-        $http.post('http://localhost:8000/user/log_out/').success(function(){
+        $http.post('/user/log_out/').success(function(){
             window.location.replace('/home/page');
         })
     }
@@ -46,12 +45,12 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
             for(var i=0; i<$scope.selectedCats.length; i++)
                 cat_ids.push($scope.selectedCats[i]["id"])
             data["categories"] = cat_ids;
-            $http.post('http://localhost:8000/home/postmind/', data).success(function() {
+            $http.post('/home/postmind/', data).success(function() {
                 $scope.getMindTree()
             });
         } else {
             var data = $scope.mind;
-            $http.post('http://localhost:8000/home/postmind/?submind='+$scope._mind.mind.id, data).success(function() {
+            $http.post('/home/postmind/?submind='+$scope._mind.mind.id, data).success(function() {
                 $scope.getMindTree()
             });
         }
@@ -66,9 +65,9 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     $scope.getMindTree = function(id) {
         var request;
         if(!id) {
-            request = $http.get('http://localhost:8000/home/minds/')
+            request = $http.get('/home/minds/')
         } else
-            request = $http.get('http://localhost:8000/home/minds/?id='+id)
+            request = $http.get('/home/minds/?id='+id)
         request.success(function(data, status, headers, config) {
             $scope.mind_tree = data
             $scope.graph.drawNode =  mindsGraphNode;
@@ -80,13 +79,13 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     $scope.getUserStats  = function(id) {
         var request;
         if(!id) {
-            request = $http.get("http://localhost:8000/user/stats/")
+            request = $http.get("/user/stats/")
             request.success(function(data, status, headers, config){
                 $scope.user = data;
             })
         }
         else {
-            request = $http.get("http://localhost:8000/user/stats/?id="+id)
+            request = $http.get("/user/stats/?id="+id)
             request.success(function(data, status, headers, config){
                 $scope.anotherUser = data;
             })
@@ -98,9 +97,9 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
         var request;
         $scope.graphData = {}
         if(!id)
-            request = $http.get("http://localhost:8000/user/graph/subscribers/")
+            request = $http.get("/user/graph/subscribers/")
         else
-            request = $http.get("http://localhost:8000/user/graph/subscribers/?id="+id)
+            request = $http.get("/user/graph/subscribers/?id="+id)
         var res = {}
 
         request.then(function(data, status, headers, config){
@@ -114,9 +113,9 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
         var request;
         $scope.graphData = {}
         if(!id)
-            request = $http.get("http://localhost:8000/user/graph/followers/")
+            request = $http.get("/user/graph/followers/")
         else
-            request = $http.get("http://localhost:8000/user/graph/followers/?id="+id)
+            request = $http.get("/user/graph/followers/?id="+id)
         var res = {}
 
         request.then(function(data, status, headers, config){
@@ -127,7 +126,7 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     }
 
     $scope.getCategories = function(name) {
-        $http.get("http://localhost:8000/home/categories/?name="+name)
+        $http.get("/home/categories/?name="+name)
             .success(function(data, status, headers, config) {
                 $scope.categories = data;
                 $scope.category_request_str =  name;
@@ -144,7 +143,7 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     }
 
     $scope.fullMindData = function(id){
-        $http.get("http://localhost:8000/home/minds/"+id+'/').success(function(data,status,headers,config) {
+        $http.get("/home/minds/"+id+'/').success(function(data,status,headers,config) {
             $scope._mind = data;
         })
     }
@@ -155,7 +154,7 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     }
 
     $scope.rateMind = function(like) {
-        $http.post('http://localhost:8000/home/like/?positive='+like
+        $http.post('/home/like/?positive='+like
                     +'&mind_id='+$scope._mind.mind.id).success(function(){
                         $scope.fullMindData($scope._mind.mind.id);
                     })

@@ -7,11 +7,11 @@ from django.contrib.auth import get_user_model
 
 from django.contrib.auth import authenticate, login
 from . import models
-# Create your views here.
+from django.contrib import messages
 
 def render_registration_form(request):
     template = loader.get_template('templates/index.html')
-    context = RequestContext(request, {})
+    context = RequestContext(request, {"form": models.RegistrationForm()})
 
     return HttpResponse(template.render(context))
 
@@ -22,13 +22,20 @@ def render_login_form(request):
     return HttpResponse(template.render(context))
 
 def retrieve_registration_form(request):
+    form = models.RegistrationForm(request.POST)
+
     login = request.POST.get('login')
-    email = request.POST.get('email')
-    passwd = request.POST.get('passwd')
+    valid, msg = form.is_valid()
+    if valid:
+        passwd = request.POST.get('password')
+        user = get_user_model().objects.create_user(username=login, password=passwd,email='d@d.d')
 
-    user = get_user_model().objects.create_user(username=login, email=email, password=passwd)
+        return HttpResponseRedirect(reverse('auth:login'))
+    else:
+        messages.add_message(request, messages.INFO, msg)
 
-    return HttpResponseRedirect(reverse('auth:login', args=()))
+        response = HttpResponseRedirect(reverse('auth:registration'))
+        return response
 
 def retrieve_login_form(request):
     form = models.LoginForm(request.POST)
@@ -38,9 +45,17 @@ def retrieve_login_form(request):
 
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse('blog:home', args=()))
-    else:
-        template = loader.get_template('templates/login.html')
-        context = RequestContext(request, {"form": models.LoginForm(), "message": "incorrect input"})
+            return HttpResponseRedirect(reverse('blog:home'))
+        else:
+            response = HttpResponseRedirect(reverse('auth:login'))
+            messages.add_message(request, messages.INFO, 'Current user is not registred yet')
 
-        return HttpResponse(template.render(context))
+            return response
+    else:
+        messages.add_message(request, messages.INFO, 'Fill required fields')
+
+        response = HttpResponseRedirect(reverse('auth:login'))
+        return response
+
+def handle_all(request):
+    return HttpResponseRedirect(reverse('blog:home'))

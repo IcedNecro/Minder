@@ -29,7 +29,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(models.AbstractBaseUser):
     username = md.CharField(max_length=40, unique=True)
     image_url = md.CharField(max_length=100,default="/static/users/default/avatar.svg")
-    email = md.CharField(max_length=100)
+    email = md.CharField(max_length=100, null=True)
     objects = CustomUserManager()
     is_staff = md.BooleanField(default=False)
     is_active = md.BooleanField(default=True)
@@ -38,7 +38,7 @@ class CustomUser(models.AbstractBaseUser):
     followers = md.ManyToManyField('self', symmetrical=False, blank=True, null=True, related_name='followers_set')
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email', username]
+    REQUIRED_FIELDS = [username,]
 
     def get_full_name(self):
         return self.username

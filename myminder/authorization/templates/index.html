@@ -8,27 +8,40 @@
         <form action="{% url 'auth:confirm_reqistration' %}" method="post">
             {% csrf_token %}
             <div class="row">
-                <label for="reg-login">Login:</label>
-                <input id='reg-login' type="text" name="login">
-            </div>
-            <div class="row">
+                <label for="login">Login:</label>
+                {{ form.login}}
 
-                <label for="reg-email">Email:</label>
-                <input id='reg-email' type="text" name="email">
             </div>
             <div class="row">
+                <label for="passwd">Password:</label>
+                {{ form.password }}
 
-                <label for="reg-passwd">Password:</label>
-                <input id='reg-passwd' type="password" name="passwd">
             </div>
             <div class="row">
-                <label for="reg-confirm-passwd">Password:</label>
-                <input id='reg-confirm-passwd' type="password" name="confirm">
+                <label for="confirmPassword">Confirm password:</label>
+                {{ form.confirmPassword }}
             </div>
             <div class="row">
                 <input type="submit">
             </div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
         </form>
     </div>
+    <footer>
+        <div class="footer-body">
+            <p>Get in touch with me</p>
+            <a><img class="contacts-image" src="{% static 'auth/img/github.svg' %}"></a>
+            <a><img class="contacts-image" src="{% static 'auth/img/linkedin.svg' %}"></a>
+            <a><img class="contacts-image" src="{% static 'auth/img/twitter.svg' %}"></a>
+            <a><img class="contacts-image" src="{% static 'auth/img/google-plus.svg' %}"></a>
+
+        </div>
+    </footer>
 </body>
 </html>
