@@ -30,7 +30,7 @@ def get_user_stats(request):
     #import ipdb; ipdb.set_trace()
     if request.method == 'GET':
 
-        id = request.QUERY_PARAMS.dict().get('id')
+        id = request.query_params.get('id')
         if id is None:
             id = request.user.id
 
@@ -85,7 +85,7 @@ def get_subscribers_graph(request):
 
     if request.method == 'GET':
         resp = {'nodes':[], 'links':[]}
-        u_id = request.QUERY_PARAMS.dict().get('id')
+        u_id = request.query_params.get('id')
         if u_id is None:
             u_id = request.user.id
 
@@ -122,7 +122,7 @@ def get_followers_graph(request):
     if request.method == 'GET':
         resp = {'nodes':[], 'links':[]}
 
-        u_id = request.QUERY_PARAMS.dict().get('id')
+        u_id = request.query_params.get('id')
         if u_id is None:
             u_id = request.user.id
 
