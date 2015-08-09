@@ -1,3 +1,5 @@
+var submind_mode = false;
+
 $(document).ready(function(){
     var isShown = true;
 
@@ -19,8 +21,6 @@ $(document).ready(function(){
         var dialog = '#' + $(this)[0].id + '-dialog';
         $(dialog).dialog('open');
     })
-
-    $()
 
     $('.expandable').click(function() {
         var id = '.'+$(this)[0].id;
@@ -50,11 +50,19 @@ $(document).ready(function(){
                 text: 'ok',
                 click: function() {
                     angular.element(document.getElementById('controller-body')).scope().postMind();
+                    if (submind_mode) {
+                        delete angular.element(document.getElementById('controller-body')).scope().submind;
+                        submind_mode = false;
+                    }
                     $('#create-mind-dialog').dialog('close');
                 }
             },{
                 text: 'Cancel',
                 click: function() {
+                    if (submind_mode) {
+                        delete angular.element(document.getElementById('controller-body')).scope().submind;
+                        submind_mode = false;
+                    }
                     $('#create-mind-dialog').dialog('close');
                 }
             },
@@ -118,6 +126,6 @@ $(document).ready(function(){
                 //angular.element(document.getElementById('controller-body')).scope().logoutRequest();
                 $('#display-mind-dialog').dialog('close');
             }
-        },
+        },]
     })
 })

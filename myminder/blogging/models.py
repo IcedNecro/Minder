@@ -68,3 +68,11 @@ class Mind(MPTTModel):
 
     def __unicode__(self):
         return self.title
+
+class Like(md.Model):
+    liked = md.ForeignKey(CustomUser, related_name='likes')
+    mind = md.ForeignKey(Mind, related_name='likes')
+    positive = md.IntegerField()
+
+    def __unicode__(self):
+        return '{}-{}-{}'.format(self.mind.id, self.positive, self.liked.id)

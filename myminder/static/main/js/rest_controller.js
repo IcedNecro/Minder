@@ -11,7 +11,6 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     $scope.categories = []
     $scope.graph = new GraphVisualization()
 
-
     $scope.getFriends = function (str) {
 
         $http.get("http://localhost:8000/user/get/?name="+str)
@@ -36,31 +35,46 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
         $http.post('http://localhost:8000/user/subscribe/?id='+id)
             .success(function(data, status, headers, config) {
                  $scope.getFriends($scope.friend_request_str)
+                 $scope.getSubscribersGraph()
             })
     }
 
     $scope.postMind = function() {
-        var data = $scope.mind;
-        var cat_ids = []
-        for(var i=0; i<$scope.selectedCats.length; i++)
-            cat_ids.push($scope.selectedCats[i]["id"])
-        data["categories"] = cat_ids;
-        $http.post('http://localhost:8000/home/postmind/', data).success(function() {
+        if(!submind_mode) {
+            var data = $scope.mind;
+            var cat_ids = []
+            for(var i=0; i<$scope.selectedCats.length; i++)
+                cat_ids.push($scope.selectedCats[i]["id"])
+            data["categories"] = cat_ids;
+            $http.post('http://localhost:8000/home/postmind/', data).success(function() {
+                $scope.getMindTree()
+            });
+        } else {
+            var data = $scope.mind;
+            $http.post('http://localhost:8000/home/postmind/?submind='+$scope._mind.mind.id, data).success(function() {
+                $scope.getMindTree()
+            });
+        }
+    }
 
-        });
+    $scope.postSubmind = function(id) {
+        $scope.submind = $scope._mind.mind.title
+        $scope.openCreateSubMindDialog()
+        submind_mode = true
     }
 
     $scope.getMindTree = function(id) {
         var request;
         if(!id) {
             request = $http.get('http://localhost:8000/home/minds/')
-            request.success(function(data, status, headers, config) {
-                $scope.mind_tree = data
-                $scope.graph.drawNode =  mindsGraphNode;
-                $scope.graph.onClickCallback = mindsClickCallback;
-                $scope.graph.drawGraph(data);
-            })
-        }
+        } else
+            request = $http.get('http://localhost:8000/home/minds/?id='+id)
+        request.success(function(data, status, headers, config) {
+            $scope.mind_tree = data
+            $scope.graph.drawNode =  mindsGraphNode;
+            $scope.graph.onClickCallback = mindsClickCallback;
+            $scope.graph.drawGraph(data);
+        })
     }
 
     $scope.getUserStats  = function(id) {
@@ -72,7 +86,6 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
             })
         }
         else {
-            //disappearContent()
             request = $http.get("http://localhost:8000/user/stats/?id="+id)
             request.success(function(data, status, headers, config){
                 $scope.anotherUser = data;
@@ -95,7 +108,6 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
             $scope.graph.onClickCallback = subscribersGraphCallback;
             $scope.graph.drawGraph(data.data);
         })
-        //return res.resolve();
     }
 
     $scope.getFollowersGraph = function(id) {
@@ -112,7 +124,6 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
             $scope.graph.onClickCallback = subscribersGraphCallback;
             $scope.graph.drawGraph(data.data);
         })
-        //return res.resolve();
     }
 
     $scope.getCategories = function(name) {
@@ -132,8 +143,27 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
         $scope.selectedCats.push(cat);
     }
 
+    $scope.fullMindData = function(id){
+        $http.get("http://localhost:8000/home/minds/"+id+'/').success(function(data,status,headers,config) {
+            $scope._mind = data;
+        })
+    }
+
     $scope.requestFullMind = function(id) {
-        $http.get("http://localhost:8000/home/minds/"+id)
+        $scope.fullMindData(id)
+        $('#display-mind-dialog').dialog('open')
+    }
+
+    $scope.rateMind = function(like) {
+        $http.post('http://localhost:8000/home/like/?positive='+like
+                    +'&mind_id='+$scope._mind.mind.id).success(function(){
+                        $scope.fullMindData($scope._mind.mind.id);
+                    })
+    }
+
+    $scope.openCreateSubMindDialog = function() {
+        $('.popup-dialog').dialog('close')
+        $('#create-mind-dialog').dialog('open')
     }
 
     $scope.getUserStats();

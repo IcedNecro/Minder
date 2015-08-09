@@ -68,8 +68,6 @@ def subscribe(request):
     if request.method == 'POST':
         user = get_user_model().objects.get(pk=request.user.id)
 
-        #import ipdb; ipdb.set_trace()
-
         to_subscribe = get_user_model().objects.get(pk=request.GET['id'])
         try:
             user.following.get(pk=request.GET['id'])

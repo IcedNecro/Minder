@@ -1,11 +1,19 @@
 <html ng-app="rest_app">
 <head>
     {% load staticfiles %}
+    <script src="{% static 'libs/angular.min.js' %}"></script>
+    <script src="{% static 'libs/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'libs/d3.min.js' %}"></script>
+    <script src="{% static 'libs/jquery-ui.js' %}"></script>
+
+
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/left_menu.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/right_top_panel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/vis_style.css' %}">
+
     <script src="{% static 'main/js/left_menu.js' %}"></script>
     <script src="{% static 'main/js/right_top_panel.js' %}"></script>
     <script src="{% static 'main/js/subscribers.js' %}"></script>
@@ -33,7 +41,7 @@
                     </tr>
                     
                     <tr>
-                        <td>{{ user.minds }}</td>
+                        <td ng-click="getMindTree()">{{ user.minds }}</td>
                         <td ng-click="getSubscribersGraph()">{{ user.following }}</td>
                         <td ng-click="getFollowersGraph()">{{ user.followers }}</td>
                     </tr>
@@ -65,8 +73,9 @@
         </div>
     </div>
 
-    <div id="create-mind-dialog" title="Basic dialog">
+    <div class='popup-dialog' id="create-mind-dialog" title="Basic dialog">
         {% verbatim %}
+        <p ng-if="submind!=undefined">{{'Re: '+submind}}</p>
         <label class="row" for="create-mind-header" >Mind name</label>
         <input class="row" ng-model="mind.title" type="text" id="create-mind-header" >
         <div class="row categories">
@@ -100,7 +109,7 @@
                 <td>Fers</td>
             </tr>
             <tr>
-                <td >{{ anotherUser.minds}}</td>
+                <td ng-click="getMindTree(anotherUser.user.id)">{{ anotherUser.minds}}</td>
                 <td ng-click="getSubscribersGraph(anotherUser.user.id)">{{ anotherUser.following}}</td>
                 <td ng-click="getFollowersGraph(anotherUser.user.id)">{{ anotherUser.followers}}</td>
             </tr>
@@ -117,7 +126,7 @@
         {% endverbatim %}
     </div>
 
-    <div id="search-friend-dialog" title="Basic dialog">
+    <div class='popup-dialog' id="search-friend-dialog" title="Basic dialog">
 
         {% verbatim %}
         <div class="row">
@@ -125,7 +134,7 @@
             <input ng-model="name" type="text" id="search-friend-line" ng-keyup="getFriends(name)">
             <button class="search-friend-submit">Search..</button>
         </div>
-        <div class="table-container">
+        <div class="table-container row">
             <table id="search-friend-result" class="row">
                 <!-- Place for Angular controller -->
                 <tr ng-repeat="friend in friends">
@@ -145,24 +154,41 @@
         </div>
         {% endverbatim %}
     </div>
-    <div id="upload-avatar-dialog">
+    <div class='popup-dialog' id="upload-avatar-dialog">
         <form action="{% url 'blog:upload_avatar' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ avatar_form }}
             <input type="submit" value="Submit">
         </form>
     </div>
-    <div id="log-out-dialog">
+    <div class='popup-dialog' id="log-out-dialog">
         <p>Are you sure you want to log out?</p>
     </div>
 
-    <div id="display-mind-dialog">
+    <div class='popup-dialog' id="display-mind-dialog">
         {% verbatim %}
-        <h1> {{ mind.title }}</h1>
-        <textarea>
-            {{ mind.text }}
-        </textarea>
+        <div class="row">
+            <img class='mid-pic' ng-src="{{ _mind.mind.author.image_url }}">
+            <h1> {{ _mind.mind.title }}</h1>
+        </div>
+        <textarea class="row">{{ _mind.mind.text }}</textarea>
+        <div class="rate-mind row">
+            <table class="rate-section like">
+                <tr>
+                    <td ng-click="rateMind(1)">Like</td>
+                    <td>{{ _mind.likes }}</td>
+                </tr>
+            </table>
+            <table class="rate-section dislike">
+                <tr>
+                    <td ng-click="rateMind(0)">Dislike</td>
+                    <td>{{ _mind.dislikes }}</td>
+                </tr>
+            </table>
+        </div>
+        <button class="row" ng-click="postSubmind(_mind.mind.id)">Submind</button>
         {% endverbatim %}
+
     </div>
     <svg></svg>
 </body>

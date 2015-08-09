@@ -1,0 +1,23 @@
+.category circle {
+    fill:#022759;
+}
+
+.node circle {
+    stroke-width: 5px;
+    stroke: purple;
+}
+svg {
+    position: fixed;
+    background:url('/static/main/img/background.png');
+}
+.node circle:hover {
+    cursor: pointer;
+    stroke: blue;
+}
+.link {
+    stroke: #c5deff;
+}
+.node text {
+    fill: #0698e1;
+
+}

@@ -21,7 +21,6 @@ div.menu-wrapper {
 }
 
 div.user-space {
-
 }
 
 /* stats table */
@@ -56,11 +55,11 @@ div.user-space {
 }
 
 .stats-table tr:last-child {
-    background-color:#222222;
+    background-color:#08122e;
 }
 
 .stats-table tr:last-child td {
-    background-color:#222222;
+    background-color:#08122e;
     border-radius: 0 0 10px 10px;
     -webkit-box-shadow: inset 4px 0px 44px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: inset 4px 0px 44px -9px rgba(0,0,0,0.75);
@@ -78,7 +77,7 @@ div.user-space img
 }
 
 div.user-space {
-    background-color: #222222;
+    background-color:#022759;
     color: white;
     margin: 5px 0;
     padding: 5px 0;
@@ -90,7 +89,7 @@ p.user-name {
     width: 100%;
     text-align: center;
     font-weight: bold;
-    background-color: #222222;
+    background-color: #08122e;
     color: white;
     margin: 5px 0;
     padding: 5px 0;
@@ -101,7 +100,7 @@ p.user-name {
 div.menu {
     width: 200px;
     height: 100%;
-    background-color: #444444;
+    background-color: #08122e;
     box-shadow: 0px 0px 10px black;
     padding: 10px;
 }
@@ -131,10 +130,10 @@ div.menu .menu-list>li {
 }
 div.menu .menu-list>li {
     /*padding: 15px 0;*/
-
+    background-color: #0d6bad;
     font-weight: bold;
     color: white;
-
+    border radius: 5px;
     transition: 0.2s all;
     -moz-transition: 0.2s all;
     -webkit-transition: 0.2s all;
@@ -150,7 +149,6 @@ div.menu .menu-list>li:hover {
 
 .menu-sublist li,
 div.single-menu-node {
-    background-color: #666666;
     padding: 5px 0px;
     margin: 5px;
     padding-left:35px;
@@ -166,11 +164,11 @@ div.single-menu-node:hover {
 }
 
 .menu-sublist li:hover {
-   background-color: #FF6600;
+   background-color: #0698e1;
 }
 
 .menu-sublist li {
-    background-color: #7f7f7f;
+    background-color: #022759;
 }
 
 .menu-sublist {
@@ -186,10 +184,11 @@ div.single-menu-node:hover {
     width:20px;
     height: 20px;
     border-radius: 3px;
-    background-color: #444444;
+    background-color:#0698e1;
 }
 
 /* overrides for dialogs */
+div.drag_overlay,
 div.ui-widget-overlay {
     width: 100%;
     background-color: #000;
@@ -199,6 +198,11 @@ div.ui-widget-overlay {
     z-index: 105;
     opacity: 0.5;
 }
+
+div.drag_overlay {
+    background-color: red;
+}
+
 
 .ui-dialog-titlebar {
     display: none;
@@ -210,14 +214,14 @@ div.dialog-popup {
     position: fixed;
     z-index: 106;
     padding:20px;
-    background-color:#444444;
+    background-color:#022759;
     border-radius: 20px;
     box-shadow: 0px 0px 10px white;
 }
 
 div.dialog-popup .row{
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 div.dialog-popup textarea {
@@ -226,8 +230,8 @@ div.dialog-popup textarea {
 
 div.dialog-popup textarea,
 div.dialog-popup input[type='text'] {
-    background-color: #222222;
-    border: 2px solid #FF6600;
+    background-color: #08122e;
+    border: 2px solid #0698e1;
     color: white;
     padding: 10px;
     width: 100%;
@@ -236,10 +240,10 @@ div.dialog-popup input[type='text'] {
 div.dialog-popup button {
     height: 30px;
     width: 100px;
-    color: #FF6600;
+    color: #0698e1;
     border-radius: 15px;
-    background-color: #444444;
-    border: 2px solid #FF6600;
+    background-color: #08122e;
+    border: 2px solid #0698e1;
 }
 
 div.dialog-popup button:hover {
@@ -262,8 +266,8 @@ div.dialog-popup button:hover {
 #search-friend-result {
 
     width: 100%;
-    background-color: #222222;
-    border: 2px solid #FF6600;
+    background-color: #08122e;
+    border: 2px solid #0698e1;
 }
 
 
@@ -275,7 +279,7 @@ div.dialog-popup button:hover {
 
 #search-friend-result tr td {
     height:50px;
-    border: 1px solid #FF6600;
+    border: 1px solid #0698e1;
 }
 
 #search-friend-result tr td:first-child {
@@ -390,4 +394,43 @@ line {
 
 image {
     border-radius: 25px;
+}
+
+/* Likes/dislikes section */
+.rate-mind {
+    position:relative;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.rate-section {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    display: table-cell;
+    text-align: center;
+}
+
+.rate-section td {
+    width: 75px;
+}
+
+.rate-section td:first-child{
+    background-color:#666666;
+    border-radius: 25px 0 0 25px;
+}
+
+.rate-section td:last-child{
+    background-color: #08122e;
+    border-radius: 0 25px 25px 0;
+}
+
+.dislike {
+    left: 150px;
+}
+
+/* display single mind section */
+.mid-pic {
+    width: 100px;
+    height: 100px;
 }

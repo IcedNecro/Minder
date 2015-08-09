@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^postmind/', views.create_mind),
     url(r'^categories/', views.MindsList.as_view()),
     url(r'^minds/$', views.get_mind_tree),
-    url
+    url(r'^minds/(?P<mind_id>[0-9]+)/$', views.get_single_mind),
+    url(r'^like/$', views.put_rate)
 ]

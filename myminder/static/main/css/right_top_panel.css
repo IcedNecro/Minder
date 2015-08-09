@@ -5,11 +5,12 @@
     top: 10px;
     right: 10px;
     border-radius: 20px;
-    background-color: #444444;
     box-shadow: 0 0 10px black;
     padding:20px;
     z-index: 50;
     transition: 0.2s all;
+    background-color: #08122e;
+
     -webkit-transition: 0.2s all;
     -moz-transition: 0.2s all;
     transition-timing-function: ease-in;
