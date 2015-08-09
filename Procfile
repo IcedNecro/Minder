@@ -1,1 +1,1 @@
-web: gunicorn cubism_awo93.wsgi --log-file -
+web: gunicorn myminder.wsgi --log-file -

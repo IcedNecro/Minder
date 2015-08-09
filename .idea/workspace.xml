@@ -2,64 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04ca6ba6-c067-4038-896f-c839df44f2fe" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/authorization/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/authorization/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/authorization/static/css/left_menu.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/authorization/templates/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/authorization/templates/login.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/authorization/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/authorization/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/authorization/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/blogging/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/blogging/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/blogging/forms.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/blogging/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/blogging/serializers.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/blogging/templates/home.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/blogging/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/blogging/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/blogging/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/db.sqlite3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/manage.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/myminder/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/auth/css/auth.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/libs/angular.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/libs/d3.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/libs/jquery-2.1.4.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/libs/jquery-ui.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/css/left_menu.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/css/right_top_panel.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/css/vis_style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/img/add199.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/img/background.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/img/dreaming.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/img/group67.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/img/home4.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/img/invisible2.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/img/leader.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/img/multiple25.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/js/left_menu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/js/rest_controller.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/js/right_top_panel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/main/js/subscribers.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/users/Roman12/avatar.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/users/Roman12/avatar.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/users/adolph_hitler/avatar.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/users/default/avatar.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/static/users/roman/avatar.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/user_managment/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/user_managment/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/user_managment/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/user_managment/serializers.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/user_managment/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/user_managment/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/user_managment/util.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myminder/user_managment/views.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myminder/authorization/__init__.py" afterPath="$PROJECT_DIR$/Procfile" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myminder/myminder/settings.py" afterPath="$PROJECT_DIR$/myminder/settings.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myminder/myminder/urls.py" afterPath="$PROJECT_DIR$/myminder/urls.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myminder/myminder/wsgi.py" afterPath="$PROJECT_DIR$/myminder/wsgi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Procfile" afterPath="$PROJECT_DIR$/Procfile" />
     </list>
     <ignored path="Minder.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -90,34 +33,62 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Procfile" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Procfile" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Procfile">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="44" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
+              <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/myminder/settings.py">
+      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user_managment/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.736">
-              <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wsgi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myminder/wsgi.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user_managment/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/myminder/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/myminder/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding>
-                <element signature="e#224#233#0" expanded="true" />
-              </folding>
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manage.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -147,16 +118,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="92" column="33" selection-start-line="92" selection-start-column="33" selection-end-line="92" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myminder/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -218,10 +179,10 @@
         <option value="$PROJECT_DIR$/myminder/myminder/urls.py" />
         <option value="$PROJECT_DIR$/myminder/blogging/templates/home.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/myminder/__init__.py" />
         <option value="$PROJECT_DIR$/static/main/js/left_menu.js" />
         <option value="$PROJECT_DIR$/myminder/settings.py" />
+        <option value="$PROJECT_DIR$/Procfile" />
       </list>
     </option>
   </component>
@@ -683,26 +644,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myminder/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myminder/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.024">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Procfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="44" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -749,10 +694,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_managment/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_managment/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myminder/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/myminder/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.736">
-          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Procfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
           <folding />
         </state>
       </provider>
