@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 # Application definition
 
@@ -112,3 +113,12 @@ STATICFILES_DIRS = (
     '/main/static',
     '/auth/static',
 )
+
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+# if DEBUG is False:
+DATABASES['default'] = dj_database_url.config()
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATIC_ROOT = 'staticfiles'
+ASE_DIR = os.path.dirname(os.path.abspath(__file__))

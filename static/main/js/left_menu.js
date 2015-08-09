@@ -90,7 +90,7 @@ $(document).ready(function(){
         buttons: [{
             text: 'ok',
             click: function() {
-                $('#search-friend-dialog').dialog('close');
+                $('#upload-avatar-dialog').dialog('close');
             }
         },]
     })

@@ -1,5 +1,12 @@
+whitenoise
 django
 djangorestframework
 ipdb
 django-mptt
 django-angular
+dj-database-url
+dj-static
+gunicorn
+psycopg2
+static
+wsgiref
