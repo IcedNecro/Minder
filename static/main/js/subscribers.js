@@ -12,7 +12,6 @@ var GraphVisualization = function() {
 }
 
 var subscribersGraphCallback = function (node) {
-    open_right_panel()
     angular.element(document.getElementById('controller-body')).scope().getUserStats(node.id);
 };
 
@@ -118,42 +117,23 @@ GraphVisualization.prototype.drawGraph = function(data){
     var node = this.drawNode(this.g, json);
     node.on("click",this.onClickCallback);
 
-
     var drag = d3.behavior.drag()
         .on("drag", function() {
             if(d3.event.sourceEvent.ctrlKey == true) {
                 var dx = d3.event.sourceEvent.movementX;
                 var dy = d3.event.sourceEvent.movementY;
 
-                self.g.attr('transform','translate('+(self.currentX+=dx)+ ',-'+(self.currentY-=dy)+')')
+                self.g.attr('transform','translate('+(self.currentX+=dx)+ ','+(-(self.currentY-=dy))+')');
             }
         }).on('dragstart', function (d) {
             if(d3.event.sourceEvent.ctrlKey == true) {
-                d3.event.sourceEvent.stopPropagation();
+                //d3.event.sourceEvent.stopPropagation();
                 d3.select(this).classed("dragging", true);
             }
         }).on('dragend', function dragended(d) {
-            if(d3.event.sourceEvent.ctrlKey == true) {
-                d3.select(this).classed("dragging", false);
-            }
+            d3.select(this).classed("dragging", false);
+            d3.select('.drag_overlay').style('display', 'none');
         });
-        var drag = d3.behavior.drag()
-            .on("drag", function() {
-                if(d3.event.sourceEvent.ctrlKey == true) {
-                    var dx = d3.event.sourceEvent.movementX;
-                    var dy = d3.event.sourceEvent.movementY;
-
-                    self.g.attr('transform','translate('+(self.currentX+=dx)+ ',-'+(self.currentY-=dy)+')');
-                }
-            }).on('dragstart', function (d) {
-                if(d3.event.sourceEvent.ctrlKey == true) {
-                    //d3.event.sourceEvent.stopPropagation();
-                    d3.select(this).classed("dragging", true);
-                }
-            }).on('dragend', function dragended(d) {
-                d3.select(this).classed("dragging", false);
-                d3.select('.drag_overlay').style('display', 'none');
-            });
 
     self.nonDialog = true
     d3.select('body')

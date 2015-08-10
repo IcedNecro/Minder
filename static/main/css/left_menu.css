@@ -321,7 +321,7 @@ div.dialog-popup button:hover {
 }
 
 #create-mind-dialog textarea{
-    height: 500px;
+    height: 300px;
 }
 
 #create-mind-dialog input[type="text"] {
@@ -386,6 +386,9 @@ div.dialog-popup button:hover {
     border: 1px solid white;
 }
 
+#category-name {
+    width: 70%;
+}
 /* create-mind dialog */
 
 line {
@@ -433,4 +436,30 @@ image {
 .mid-pic {
     width: 100px;
     height: 100px;
+}
+
+.submind-card {
+  float: right;
+  position: relative;
+  width: 350px;
+  background-color: #08122e;
+  padding: 10px;
+}
+
+.submind-card img {
+    width:75px;
+    height: 75px;
+    display: table-cell;
+    float:left;
+}
+.submind-card-text {
+    display:table-cell;
+}
+
+.submind-card p {
+    margin-left: 10px;
+}
+
+.submind-title {
+    font-weight: bold;
 }

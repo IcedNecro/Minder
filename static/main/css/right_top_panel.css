@@ -10,21 +10,8 @@
     z-index: 50;
     transition: 0.2s all;
     background-color: #08122e;
-
-    -webkit-transition: 0.2s all;
-    -moz-transition: 0.2s all;
-    transition-timing-function: ease-in;
-    -webkit-transition-timing-function: ease-in;
-    -moz-transition-timing-function: ease-in;
-
 }
 
-.hidden-panel {
-    transition: 0.2s all;
-    -webkit-transition: 0.2s all;
-    -moz-transition: 0.2s all;
-    right:-240px;
-}
 .right-top-info-panel img {
     width: inherit;
 }

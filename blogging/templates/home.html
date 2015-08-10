@@ -67,7 +67,19 @@
 
     <div class='popup-dialog' id="create-mind-dialog" title="Basic dialog">
         {% verbatim %}
-        <p ng-if="submind!=undefined">{{'Re: '+submind}}</p>
+        <div ng-if="submind">
+            <div class="mind-card">
+                <img class='mid-pic' ng-src="{{ user.user.image_url }}">
+                <div ng-if='_mind.mind.parent' class="submind-card">
+                    <img ng-src="{{ _mind.mind.author.image_url }}">
+                    <div class="submind-card-text">
+                        <p class="submind-title">{{ 'RE: '+_mind.mind.title }}</p>
+                        <p >{{ wrapText(_mind.mind.text) }}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <label class="row" for="create-mind-header" >Mind name</label>
         <input class="row" ng-model="mind.title" type="text" id="create-mind-header" >
         <div class="row categories">
@@ -77,7 +89,10 @@
             <button class="add-category-button">+ Add</button>
             <div class="row category-labels-selector">
                 <label for="category-name">Category: </label>
-                <input type='text' id="category-name" ng-model="cat_name" ng-keyup="getCategories(cat_name)">
+                <div class='row'>
+                    <input type='text' id="category-name" ng-model="cat_name" ng-keyup="getCategories(cat_name)">
+                    <button ng-if="categories.length == 0" ng-click="createCategory(cat_name)">Add Category</button>
+                </div>
                 <ul class="category-line" >
                     <li class="select-category" ng-repeat="cat in categories" ng-click="addCategory(cat)"><p>{{ cat.category_title }}</p></li>
                 </ul>
@@ -160,10 +175,24 @@
     <div class='popup-dialog' id="display-mind-dialog">
         {% verbatim %}
         <div class="row">
-            <img class='mid-pic' ng-src="{{ _mind.mind.author.image_url }}">
-            <h1> {{ _mind.mind.title }}</h1>
+            <div class="mind-card">
+                <img class='mid-pic' ng-src="{{ _mind.mind.author.image_url }}">
+                <div ng-if='_mind.mind.parent' class="submind-card">
+                    <img ng-src="{{ _mind.mind.parent.author.image_url }}">
+                    <div class="submind-card-text">
+                        <p class="submind-title">{{ 'RE: '+_mind.mind.parent.title }}</p>
+                        <p >{{ wrapText(_mind.mind.parent.text) }}</p>
+                    </div>
+
+                </div>
+            </div>
+            <h1 ng-if="!edit"> {{ _mind.mind.title }}</h1>
+            <input type='text' ng-model="_mind.mind.title" ng-if="edit" value="{{ _mind.mind.title }}" />
+
         </div>
-        <textarea class="row">{{ _mind.mind.text }}</textarea>
+        <textarea class="row" ng-if="!edit" readonly>{{ _mind.mind.text }}</textarea>
+        <textarea class="row" ng-if="edit" ng-model="_mind.mind.text">{{ _mind.mind.text }}</textarea>
+
         <div class="rate-mind row">
             <table class="rate-section like">
                 <tr>
@@ -178,7 +207,12 @@
                 </tr>
             </table>
         </div>
-        <button class="row" ng-click="postSubmind(_mind.mind.id)">Submind</button>
+        <div class="row">
+            <button ng-if='!edit' ng-click="postSubmind(_mind.mind.id)">Submind</button>
+            <button ng-if='_mind.authored' ng-click="causeEdit(_mind.mind.id)">{{ process }}</button>
+            <button ng-if="edit" ng-click="deleteMind(_mind.mind.id)">Delete</button>
+
+        </div>
         {% endverbatim %}
 
     </div>

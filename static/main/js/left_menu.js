@@ -32,6 +32,10 @@ $(document).ready(function(){
 
     });
 
+    $('.close-panel').click(function(){
+        $('.right-top-info-panel').hide()
+    })
+
     $(".add-category-button").click(function() {
         var id = ".category-labels-selector";
         if($(id).css('display')=='none')
@@ -60,9 +64,10 @@ $(document).ready(function(){
                 text: 'Cancel',
                 click: function() {
                     if (submind_mode) {
-                        delete angular.element(document.getElementById('controller-body')).scope().submind;
                         submind_mode = false;
                     }
+                    angular.element(document.getElementById('controller-body')).scope().resetSubmindMode();
+
                     $('#create-mind-dialog').dialog('close');
                 }
             },
@@ -123,9 +128,12 @@ $(document).ready(function(){
         buttons: [{
             text: 'Ok',
             click: function() {
-                //angular.element(document.getElementById('controller-body')).scope().logoutRequest();
+                angular.element(document.getElementById('controller-body')).scope().stopEdit();
                 $('#display-mind-dialog').dialog('close');
             }
         },]
     })
+
+    $('.right-top-info-panel').hide()
+
 })

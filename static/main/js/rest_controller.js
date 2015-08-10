@@ -9,7 +9,7 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     $scope.selectedCats = []
     $scope.categories = []
     $scope.graph = new GraphVisualization()
-
+    $scope.process = "Edit"
     $scope.getFriends = function (str) {
 
         $http.get("/user/get/?name="+str)
@@ -47,12 +47,21 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
             data["categories"] = cat_ids;
             $http.post('/home/postmind/', data).success(function() {
                 $scope.getMindTree()
+                $scope.getUserStats()
+                delete $scope.mind
+                delete $scope.categories
             });
         } else {
             var data = $scope.mind;
             $http.post('/home/postmind/?submind='+$scope._mind.mind.id, data).success(function() {
-                $scope.getMindTree()
+                $scope.getMindTree($scope._mind.mind.author.id)
+                $scope.getUserStats()
+                delete $scope.categories
+                delete $scope.mind
+                delete $scope._mind
             });
+            submind_mode = false;
+            $scope.submind_mode = false;
         }
     }
 
@@ -88,8 +97,9 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
             request = $http.get("/user/stats/?id="+id)
             request.success(function(data, status, headers, config){
                 $scope.anotherUser = data;
+                $('.right-top-info-panel').show()
+
             })
-            appearContent()
         }
     }
 
@@ -142,14 +152,34 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
         $scope.selectedCats.push(cat);
     }
 
+    $scope.createCategory = function(name) {
+        var data = {
+            category: name,
+        }
+        $http.post('/home/categories/create/', data).success(function(data, status, headers, config) {
+            $scope.getCategories(name)
+        })
+    }
+
     $scope.fullMindData = function(id){
         $http.get("/home/minds/"+id+'/').success(function(data,status,headers,config) {
-            $scope._mind = data;
+            if(data.mind.parent) {
+                $scope._mind = data;
+
+                $http.get("/home/minds/"+data.mind.parent+'/').success(function(data,status,headers,config) {
+                   var parent = data;
+                    $scope._mind.mind.parent = parent.mind;
+
+                })
+            } else {
+                $scope._mind = data;
+            }
         })
     }
 
     $scope.requestFullMind = function(id) {
         $scope.fullMindData(id)
+
         $('#display-mind-dialog').dialog('open')
     }
 
@@ -163,6 +193,48 @@ rest_controller.controller('rest-controller', function ($scope, $http) {
     $scope.openCreateSubMindDialog = function() {
         $('.popup-dialog').dialog('close')
         $('#create-mind-dialog').dialog('open')
+    }
+
+    $scope.causeEdit = function(id) {
+        if(!$scope.edit) {
+            $scope.edit = true;
+            $scope.process = "Save";
+        } else {
+            $scope.updateMind(id);
+            $scope.edit = false;
+            $scope.process = 'Edit';
+        }
+    }
+
+    $scope.stopEdit = function() {
+        $scope.edit = false;
+        $scope.process = "Edit";
+    }
+
+    $scope.deleteMind = function(id) {
+        $http.post('/home/minds/delete/?mind_id='+id)
+            .success(function() {
+                $('#display-mind-dialog').dialog('close')
+                $scope.getMindTree($scope._mind.mind.author.id)
+
+            })
+    }
+
+    $scope.updateMind = function(id) {
+        $http.post('/home/minds/update/?mind_id='+id, $scope._mind.mind)
+            .success(function() {
+                $scope.requestFullMind($scope._mind.mind.id)
+                $scope.getMindTree($scope._mind.mind.author.id)
+            })
+    }
+
+    $scope.wrapText = function(text) {
+        return text.length<100 ? text: text.slice(0,100)+'...';
+    }
+
+    $scope.resetSubmindMode = function() {
+        delete $scope.submind;
+        delete $scope._mind;
     }
 
     $scope.getUserStats();

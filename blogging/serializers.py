@@ -13,8 +13,10 @@ class MindSerializer(serializers.ModelSerializer):
     author = CustomUserSerializer()
 
     class Meta:
-        fields = ['id', 'title', 'text', 'author']
+        fields = ['id', 'title', 'text', 'author', 'parent']
         model = models.Mind
+
+MindSerializer.parent = MindSerializer()
 
 class CategorySerializer(serializers.ModelSerializer):
 

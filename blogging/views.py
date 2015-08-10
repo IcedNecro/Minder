@@ -16,7 +16,7 @@ class MindsList(generics.ListAPIView):
     serializer_class = serializers.CategorySerializer
 
     def get_queryset(self):
-        name = self.request.QUERY_PARAMS['name']
+        name = self.request.query_params['name']
         filtered = models.MindCategory.objects.filter(category_title__contains=name)
         return filtered
 
@@ -141,13 +141,16 @@ def get_single_mind(request, mind_id):
     mind = models.Mind.objects.get(pk=mind_id)
     serialized_mind = serializers.MindSerializer(mind).data
 
+    id = request.user.id
+
     liked = mind.likes.filter(positive=True).count()
     dislikes = mind.likes.filter(positive=False).count()
 
     res = {
         'mind': serialized_mind,
         'likes': liked,
-        'dislikes': dislikes
+        'dislikes': dislikes,
+        'authored': mind.author.id == id
     }
 
     return Response(res)
@@ -167,3 +170,50 @@ def put_rate(request):
             obj.delete()
 
         return Response(status=status.HTTP_202_ACCEPTED)
+
+@login_required
+@api_view(['POST', ])
+def create_category(request):
+    uid = request.user.id
+    user = get_user_model().objects.get(pk=uid)
+
+    cat = models.MindCategory.objects.create(category_title=request.data['category'])
+    cat.authors.add(user)
+
+    return Response(status=status.HTTP_201_CREATED)
+
+@login_required
+@api_view(['POST',])
+def delete_mind(request):
+    uid = request.user.id
+    mind_id = request.query_params.get('mind_id')
+
+    mind = models.Mind.objects.get(author_id=uid, pk=mind_id)
+    children = [mind for mind in mind.get_children()]
+    for child in children:
+        for c in child.get_children():
+            if c not in children:
+                children.append(c)
+
+    for c in children:
+        c.delete()
+    mind.delete()
+
+    return Response(status=status.HTTP_200_OK)
+
+@login_required()
+@api_view(['POST',])
+def update_mind(request):
+
+    uid = request.user.id
+    mind_id = request.query_params.get('mind_id')
+    mind = models.Mind.objects.get(author_id=uid, pk=mind_id)
+
+    mind.text = request.data['text']
+    mind.title = request.data['title']
+
+    mind.save()
+
+    return Response(status=status.HTTP_200_OK)
+
+
